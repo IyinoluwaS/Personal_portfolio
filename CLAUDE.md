@@ -23,12 +23,11 @@ Opening `index.html` directly in a browser also works.
 ### Layout details that span files
 
 - **The desktop hero is absolutely positioned.** `.panel`, `.h-left`, `.h-portrait`, `.h-right`, `.h-foot` and the `.deco` circles are placed with percentage `left`/`top` values inside a fixed-aspect-ratio `.hero` (1.41:1, 700–900px tall). Changing the hero text or the portrait size can make elements overlap, so check it at several widths.
-- **Breakpoints:** at `max-width: 1023px` the hero switches to a normal flex column and every hero element is reset to `position:relative`. At `max-width: 560px` the phone tweaks apply. A new hero element needs overrides in the 1023px block.
+- **Breakpoints:** at `max-width: 1279px` the top-bar email hides and the project cards drop from three columns to two, with the last card spanning both. At `max-width: 1023px` the hero switches to a normal flex column, every hero element is reset to `position:relative`, and the inline `.nav-links` give way to the hamburger menu. At `max-width: 560px` the phone tweaks apply. A new hero element needs overrides in the 1023px block.
 - **Section grid:** each `.sec` is a 12-column grid. `.sec-head` takes columns 1–4, `.sec-body` columns 6–12, and `.sec-wide` spans the full width. At 1023px and below, everything stacks.
 - **Colors** are CSS custom properties on `:root` (there is no dark mode). One exception: the chat-icon SVG in the hero hardcodes `#E4E6E9`, which equals `--sheet`, so update both together.
-- **Section numbering** ("01 — About" … "05 — Contact") appears in each section's `.eyebrow` and again in the `.menu-num` spans of `#site-menu`. When you add, remove or reorder a section, update both places.
+- **Section numbering** ("01 — About" … "05 — Contact") appears in each section's `.eyebrow` and again in the `.menu-num` spans of `#site-menu`, and the section links also appear in the top bar's `.nav-links`. When you add, remove or reorder a section, update all three places.
 
-## Placeholders still in the content
+## Content source
 
-Some links and text are unfinished. Don't invent values for them; ask the user:
-- `href="#add-…"` anchors: Syllo repo and demo URLs, and the Finance Manager repo URL
+Project, experience and skills content is drawn from the user's résumé (`files/Iyinoluwa-Sopeyin-Resume.pdf`). Don't invent links or claims; ask the user. Syllo has no public repo yet, so its card has no links.

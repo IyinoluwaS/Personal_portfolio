@@ -24,6 +24,13 @@
     <a class="logo" href="#top">Iyin<span class="accent">.</span></a>
     <a class="email" href="mailto:iyinoluwasopeyin@gmail.com">iyinoluwasopeyin@gmail.com</a>
     <div class="spacer"></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
     <button class="iconbtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
       <svg class="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M8 12h12"></path><path d="M4 17h16"></path></svg>
       <svg class="icon-close" hidden width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
@@ -113,7 +120,7 @@
           <span class="dot ring" aria-hidden="true"></span>
         </div>
         <h3 class="proj-title">Syllo</h3>
-        <p class="proj-text">Syllo turns Canvas course exports into a clear view of the semester. I led the backend: a pipeline that takes Canvas EPUB course exports, converts them into structured academic information, and feeds a semester dashboard. The backend runs on FastAPI with Pydantic models and SQLite, using NVIDIA Nemotron for extraction; the dashboard is built in React and TypeScript.</p>
+        <p class="proj-text">Syllo turns Canvas course exports into a clear view of the semester. I led the backend: a FastAPI pipeline that converts Canvas EPUB exports into structured deadlines, exams, schedules and course policies. NVIDIA Nemotron does the extraction, and every result is checked against Pydantic schemas and quoted sources, so unsupported data is rejected. The parser is hardened against path traversal, XML external entities and zip bombs.</p>
         <div>
           <p class="stack-label">My role · Backend lead</p>
           <ul class="stack" aria-label="Syllo tech stack">
@@ -121,15 +128,32 @@
           </ul>
         </div>
         <div class="proj-links">
-          <a class="tlink red" href="#add-syllo-repo-url">View code</a>
-          <a class="tlink red" href="#add-syllo-demo-url">Project page</a>
+          <a class="tlink red" href="https://github.com/Landyn-bot/student-hub">View code</a>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-meta">
+          <p class="label">codeLinc 11 · Team hackathon</p>
+          <span class="dot fill" aria-hidden="true"></span>
+        </div>
+        <h3 class="proj-title">Dental Time Machine</h3>
+        <p class="proj-text">A web app, built in 20 hours, that turns a dental treatment plan into plain answers: what insurance will likely pay, what you will likely pay, and how scheduling care across plan years could lower the bill. I built the results summary (totals, annual-maximum usage, a per-procedure cost chart and a cash-vs-insurance comparison), side-by-side plan comparison, and a calendar reminder before benefits reset. I wrote the calculator logic test-first.</p>
+        <div>
+          <p class="stack-label">My role · Results &amp; plan comparison</p>
+          <ul class="stack" aria-label="Dental Time Machine tech stack">
+            <li>Python</li><li>FastAPI</li><li>Pydantic</li><li>pytest</li><li>React</li><li>TypeScript</li><li>Tailwind CSS</li>
+          </ul>
+        </div>
+        <div class="proj-links">
+          <a class="tlink red" href="https://github.com/gbemilekeadesiyan-a11y/Dental-Time-Machine">View code</a>
         </div>
       </article>
 
       <article class="proj">
         <div class="proj-meta">
           <p class="label">Applied AI · Text-to-SQL</p>
-          <span class="dot fill" aria-hidden="true"></span>
+          <span class="dot ring" aria-hidden="true"></span>
         </div>
         <h3 class="proj-title">Ledger Agent</h3>
         <p class="proj-text">Ledger Agent answers natural-language questions about financial data by turning them into validated SQL queries. Built with LangGraph over SQLite, it repairs failed queries automatically, which raised accuracy from 62% to 94% on a 16-question evaluation. I also built an evaluation and ablation framework to study failure patterns and compare repair strategies.</p>
@@ -141,24 +165,6 @@
         </div>
         <div class="proj-links">
           <a class="tlink red" href="https://github.com/IyinoluwaS/ledger-agent">View code</a>
-        </div>
-      </article>
-
-      <article class="proj">
-        <div class="proj-meta">
-          <p class="label">Full-stack web app</p>
-          <span class="dot ring" aria-hidden="true"></span>
-        </div>
-        <h3 class="proj-title">Finance Manager</h3>
-        <p class="proj-text">A personal finance manager built as a full-stack application: a Python and Flask backend that exposes the app’s data, SQLite for storage, and a React frontend for the interface.</p>
-        <div>
-          <p class="stack-label">Built with</p>
-          <ul class="stack" aria-label="Finance Manager tech stack">
-            <li>Python</li><li>Flask</li><li>SQLite</li><li>React</li>
-          </ul>
-        </div>
-        <div class="proj-links">
-          <a class="tlink red" href="#add-finance-repo-url">View code</a>
         </div>
       </article>
     </div>
@@ -173,15 +179,26 @@
       <div class="job">
         <div>
           <h3 class="job-title">AI &amp; Document Intelligence Extern</h3>
-          <p class="job-company">Pfizer Advanced</p>
+          <p class="job-company">Pfizer Advanced · AI-Powered Document Insights &amp; Data Extraction Externship</p>
         </div>
         <p class="status"><span class="status-dot" aria-hidden="true"></span>Ongoing · Aug. 2026 – Present</p>
       </div>
-      <p class="job-text">Working on an AI document intelligence workflow for pharmaceutical documents. The workflow is still being built; my current focus:</p>
+      <p class="job-text">A 10-week applied AI program building a document intelligence workflow for pharmaceutical documents.</p>
       <ul class="xp">
-        <li>Writing Python preprocessing to prepare pharmaceutical documents for analysis</li>
-        <li>Developing structured extraction to pull consistent fields out of unstructured text</li>
-        <li>Connecting these steps into the larger document intelligence workflow as it takes shape</li>
+        <li>Developed a Python workflow that preprocesses pharmaceutical documents and pulls structured data out of them to support clinical supply document review</li>
+        <li>Built document-processing components that turn unstructured content into organized data for downstream search and question answering</li>
+        <li>Building skills in OCR, retrieval-augmented generation and retrieval evaluation while working toward an interactive Gradio search interface</li>
+      </ul>
+
+      <div class="job involvement">
+        <div>
+          <h3 class="job-title">Campus involvement</h3>
+          <p class="job-company">Livingstone College</p>
+        </div>
+      </div>
+      <ul class="xp">
+        <li><strong>Honors Program:</strong> support six peers through weekly study sessions, coordinating concept reviews and shared study guides</li>
+        <li><strong>Blockchain Club:</strong> peer learning on blockchain, AI and Web3 through campus technology events and discussions</li>
       </ul>
     </div>
   </section>
@@ -194,19 +211,19 @@
     <div class="sec-wide skills">
       <div>
         <p class="label">Languages</p>
-        <ul><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>C++</li><li>Java</li></ul>
+        <ul><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li><li>C++</li><li>Java</li><li>HTML/CSS</li></ul>
       </div>
       <div>
-        <p class="label">Frameworks</p>
-        <ul><li>React</li><li>FastAPI</li><li>Flask</li></ul>
+        <p class="label">Frameworks &amp; libraries</p>
+        <ul><li>FastAPI</li><li>Pydantic</li><li>React</li><li>LangGraph</li><li>SQLAlchemy</li><li>pytest</li></ul>
       </div>
       <div>
-        <p class="label">Data</p>
-        <ul><li>SQL</li><li>PostgreSQL</li></ul>
+        <p class="label">AI &amp; data</p>
+        <ul><li>Structured extraction</li><li>RAG</li><li>OCR</li><li>LLM evaluation</li><li>NVIDIA Nemotron</li></ul>
       </div>
       <div>
-        <p class="label">Cloud &amp; tooling</p>
-        <ul><li>AWS</li><li>Git</li></ul>
+        <p class="label">Tools</p>
+        <ul><li>Git &amp; GitHub</li><li>SQLite</li><li>VS Code</li></ul>
       </div>
     </div>
   </section>
@@ -223,9 +240,9 @@
         <a class="contact-email" href="mailto:iyinoluwasopeyin@gmail.com">iyinoluwasopeyin@gmail.com</a>
       </div>
       <div class="socials">
-        <a class="tlink" href="https://github.com/IyinoluwaS">GitHub</a>
-        <a class="tlink" href="https://www.linkedin.com/in/iyinoluwa-sopeyin/">LinkedIn</a>
-        <a class="tlink" href="files/Iyinoluwa-Sopeyin-Resume.pdf" target="_blank" rel="noopener">View résumé</a>
+        <a class="social" href="https://github.com/IyinoluwaS"><svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>GitHub<svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></a>
+        <a class="social" href="https://www.linkedin.com/in/iyinoluwa-sopeyin/"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg>LinkedIn<svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></a>
+        <a class="social" href="files/Iyinoluwa-Sopeyin-Resume.pdf" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M9 13h6"></path><path d="M9 17h6"></path></svg>View résumé<svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></a>
       </div>
     </div>
   </section>
