@@ -1,14 +1,16 @@
 # Iyin Sopeyin — Portfolio
 
-A personal portfolio site written in plain HTML and CSS, with a small JavaScript file for the menu.
+A personal portfolio site written in plain HTML and CSS, with a small JavaScript file for the menu. Each project links to a case study.
 
 ## Structure
 
 ```
-index.html        the page (GitHub Pages serves this automatically)
-css/styles.css    all styles
-js/main.js        opens and closes the menu
-images/           pictures used on the page
+index.html        the home page (GitHub Pages serves this automatically)
+projects/         one case-study page per project
+css/styles.css    all styles, shared by every page
+js/main.js        opens and closes the phone menu
+images/           portrait and project screenshots
+files/            résumé PDF
 ```
 
 ## Run it locally

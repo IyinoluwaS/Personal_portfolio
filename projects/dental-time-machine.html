@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dental Time Machine — Case study · Iyin Sopeyin</title>
+<meta name="description" content="The results summary, plan comparison and benefits-reset reminder I built for Dental Time Machine at codeLinc 11.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316181C'/%3E%3Ctext x='29' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='38' fill='%23fff'%3EI%3C/text%3E%3Ccircle cx='45' cy='42' r='5' fill='%23CF3B3B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="pf">
+
+<header class="sheet case-top" id="top">
+  <nav class="case-bar" aria-label="Primary">
+    <a class="logo" href="../index.html">Iyin<span class="accent">.</span></a>
+    <div class="spacer"></div>
+    <a class="case-back" href="../index.html#projects"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H5"></path><path d="M10 7l-5 5 5 5"></path></svg>All projects</a>
+  </nav>
+
+  <div class="case-hero">
+    <p class="eyebrow">Case study · codeLinc 11</p>
+    <h1 class="case-title">Dental Time Machine</h1>
+    <p class="case-lead">Dental Time Machine helps people understand what a dental treatment plan will cost them. In a 20-hour hackathon build, I built the part that answers “so what will I pay?”: the results summary, a side-by-side plan comparison and a reminder before benefits reset, from the calculations to the React screens.</p>
+    <dl class="case-meta">
+      <div><dt>My role</dt><dd>Results summary, plan comparison and reset reminder, back end and front end</dd></div>
+      <div><dt>Event</dt><dd>codeLinc 11 (Lincoln Financial), dental track</dd></div>
+      <div><dt>When</dt><dd>October 2026 · 20-hour build</dd></div>
+      <div><dt>My stack</dt><dd>Python, FastAPI, Pydantic, pytest, React, TypeScript, Tailwind CSS</dd></div>
+    </dl>
+    <div class="case-actions">
+      <a class="btn" href="https://github.com/gbemilekeadesiyan-a11y/Dental-Time-Machine">View code on GitHub<span class="arr" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></span></a>
+    </div>
+  </div>
+</header>
+
+<main class="sheet content" id="main">
+
+  <section class="sec" aria-labelledby="problem-h">
+    <div class="sec-head">
+      <p class="eyebrow">01 — Problem</p>
+      <h2 class="sec-title" id="problem-h">Saying yes without knowing the cost</h2>
+    </div>
+    <div class="sec-body prose">
+      <p>A dentist recommends a root canal, two crowns and two fillings, and the patient has to decide on the spot. What they’ll pay depends on how the deductible, coverage percentages and yearly maximum stack up, and that math is buried in dense plan documents.</p>
+      <p>My job was the moment after the math: presenting the result so someone can understand it at a glance, compare their options fairly and not lose unused benefits.</p>
+      <h3>Who it’s for</h3>
+      <p>Employees with dental benefits, at the moment their dentist recommends treatment.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="mine-h">
+    <div class="sec-head">
+      <p class="eyebrow">02 — What I built</p>
+      <h2 class="sec-title" id="mine-h">My contribution</h2>
+    </div>
+    <div class="sec-body">
+      <div class="owner">
+        <p class="owner-tag">My work</p>
+        <ul class="xp">
+          <li><strong>Results summary:</strong> totals, the plan’s share versus yours, annual-maximum usage, a per-procedure chart with a table view, and a cash-versus-insurance tab</li>
+          <li><strong>Cash-versus-insurance calculation</strong> on the backend, written test-first</li>
+          <li><strong>Plan comparison:</strong> prices your care under each plan option side by side, including the API endpoint, the calculation and the React component</li>
+          <li><strong>Reset reminder:</strong> “before your plan resets” builds a calendar file with an alert, in the browser</li>
+          <li><strong>Navigation:</strong> summary tabs and a sticky Back/Next bar, so step navigation never scrolls away</li>
+          <li><strong>Read-aloud clean-up:</strong> stripping Markdown from summaries so the voice doesn’t speak symbols</li>
+          <li><strong>Documentation:</strong> the project README, rewritten for non-technical readers</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="shots-h">
+    <div class="sec-head">
+      <p class="eyebrow">03 — On screen</p>
+      <h2 class="sec-title" id="shots-h">The results summary</h2>
+    </div>
+    <div class="sec-wide figs">
+      <figure class="fig">
+        <img src="../images/projects/dental-summary.webp" width="667" height="682" loading="lazy" decoding="async" alt="Overview tab of the results summary: a card showing you'll likely pay $2,500 and your plan likely pays $1,500 with a split bar, a timing card, and an annual-maximum meter at 100% used with a note that the plan resets January 1, in 67 days.">
+        <figcaption>Overview tab: totals, the plan’s share versus yours, and annual-maximum usage with the reset reminder.</figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../images/projects/dental-procedures.webp" width="667" height="558" loading="lazy" decoding="async" alt="Each procedure tab: a horizontal stacked bar chart for Filling 1, Filling 2, Root canal, Crown 1 and Crown 2, splitting each cost into what the plan likely pays and what you'll likely pay, with a Show as a table button.">
+        <figcaption>Each procedure tab: the split for every procedure, with a table alternative to the chart.</figcaption>
+      </figure>
+    </div>
+    <p class="sec-wide note">Screenshots from a local run using the app’s built-in demo patient and demo plan. The amounts are demo data, not a real claim.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="how-h">
+    <div class="sec-head">
+      <p class="eyebrow">04 — How it works</p>
+      <h2 class="sec-title" id="how-h">How plan comparison prices each option</h2>
+    </div>
+    <div class="sec-wide">
+      <ol class="flow">
+        <li><span class="flow-name">Load options</span><span class="flow-kind k-code">Backend</span><span class="flow-text">The endpoint takes the user’s procedures and the available plan options, including the current plan.</span></li>
+        <li><span class="flow-name">Price each plan</span><span class="flow-kind k-code">Backend</span><span class="flow-text">Runs the cost calculation for every option, with premiums in integer cents.</span></li>
+        <li><span class="flow-name">Align plan years</span><span class="flow-kind k-code">Backend</span><span class="flow-text">Every option is priced over the same number of plan years, so totals compare like with like.</span></li>
+        <li><span class="flow-name">Sort</span><span class="flow-kind k-code">Backend</span><span class="flow-text">Options are ordered by likely total. None is labelled “best”.</span></li>
+        <li><span class="flow-name">Show side by side</span><span class="flow-kind k-model">Frontend</span><span class="flow-text">A React component lays the options out next to each other.</span></li>
+      </ol>
+      <p class="flow-note">The summary cards follow the same rule: they read the calculated result directly and display it, so every number on screen traces back to tested backend code.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="decisions-h">
+    <div class="sec-head">
+      <p class="eyebrow">05 — Decisions</p>
+      <h2 class="sec-title" id="decisions-h">Choices and their trade-offs</h2>
+    </div>
+    <div class="sec-body decisions">
+      <div class="decision">
+        <h3>Compare plans, never recommend one</h3>
+        <p>Plan options are sorted by likely total, but the screen doesn’t pick a winner.</p>
+        <p class="trade">Trade-off: a less decisive screen. In exchange, it never gives coverage advice it can’t stand behind, especially while the plan options are demo data.</p>
+      </div>
+      <div class="decision">
+        <h3>Show the assumptions behind “cash or insurance?”</h3>
+        <p>When premiums are known, they’re counted for each plan year used; when they aren’t, the result says so instead of quietly leaving them out. If the two totals are within 5% of each other, the result reads “about equal” rather than implying false precision.</p>
+      </div>
+      <div class="decision">
+        <h3>Tests first for anything that produces a number</h3>
+        <p>I wrote the tests for cash versus insurance and plan comparison before the code, pinned to the demo patient’s known totals, so later changes couldn’t quietly shift the figures.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="hard-h">
+    <div class="sec-head">
+      <p class="eyebrow">06 — The hard part</p>
+      <h2 class="sec-title" id="hard-h">Making a plan comparison fair</h2>
+    </div>
+    <div class="sec-body">
+      <dl class="pfr">
+        <div><dt>Problem</dt><dd>The cheapest schedule for one plan can move some care into the next plan year. Compare that two-year total with another plan’s one-year total, and the comparison is lopsided: one side pays an extra year of premiums the other doesn’t show.</dd></div>
+        <div><dt>Fix</dt><dd>Every plan option is priced over the same number of plan years: two if any option’s best schedule moves care, otherwise one. Premiums are included for each year counted.</dd></div>
+        <div><dt>Result</dt><dd>The comparison is apples to apples, and tests check that the demo patient’s known totals ($1,975 with the best timing, $2,500 without) still hold for the current plan.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="testing-h">
+    <div class="sec-head">
+      <p class="eyebrow">07 — Testing</p>
+      <h2 class="sec-title" id="testing-h">How I checked my part</h2>
+    </div>
+    <div class="sec-body prose">
+      <h3>Backend tests</h3>
+      <p>I wrote 67 backend test cases, covering plan comparison, the summary and cash-versus-insurance math, and text clean-up for speech. All 67 pass.</p>
+      <h3>Accessibility</h3>
+      <p>The per-procedure chart has a table view, so the same numbers are available without reading a chart. The Back and Next buttons stay on screen, so nobody has to scroll to move between steps.</p>
+      <h3>Privacy</h3>
+      <p>The reset reminder’s calendar file is generated in the browser, so no reminder data is sent to a server.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="results-h">
+    <div class="sec-head">
+      <p class="eyebrow">08 — Results</p>
+      <h2 class="sec-title" id="results-h">What shipped, and its limits</h2>
+    </div>
+    <div class="sec-body prose">
+      <p>The results summary, plan comparison and reset reminder all work in the finished app, as shown in the screenshots above.</p>
+      <h3>Known limitations</h3>
+      <ul class="xp">
+        <li>The plan options and their premiums are demo values, labelled “(demo)” on screen</li>
+        <li>The cash comparison uses one typical fee per procedure for the demo, not a dentist’s actual cash price</li>
+        <li>Everything shown is an estimate, not medical or coverage advice</li>
+      </ul>
+      <h3>What it would need next</h3>
+      <ul class="xp">
+        <li>Real plan options and premiums in place of the demo plans</li>
+        <li>Actual cash prices from the dentist, where available</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<nav class="case-next" aria-label="More projects">
+  <div>
+    <p>Next project</p>
+    <a class="case-next-link" href="ledger-agent.html">Ledger Agent<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"></path><path d="M14 7l5 5-5 5"></path></svg></a>
+  </div>
+  <a class="social" href="../files/Iyinoluwa-Sopeyin-Resume.pdf" target="_blank" rel="noopener">View résumé<svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></a>
+</nav>
+
+<footer class="site-footer">
+  <p>© 2026 Iyinoluwa Sopeyin</p>
+  <a href="#top">Back to top ↑</a>
+</footer>
+
+</div>
+</body>
+</html>

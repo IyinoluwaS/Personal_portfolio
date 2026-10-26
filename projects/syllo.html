@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syllo — Case study · Iyin Sopeyin</title>
+<meta name="description" content="Syllo turns Canvas course exports into a semester dashboard. Case study of the review-before-commit import pipeline I built at SteelHacks XIII.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316181C'/%3E%3Ctext x='29' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='38' fill='%23fff'%3EI%3C/text%3E%3Ccircle cx='45' cy='42' r='5' fill='%23CF3B3B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="pf">
+
+<header class="sheet case-top" id="top">
+  <nav class="case-bar" aria-label="Primary">
+    <a class="logo" href="../index.html">Iyin<span class="accent">.</span></a>
+    <div class="spacer"></div>
+    <a class="case-back" href="../index.html#projects"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H5"></path><path d="M10 7l-5 5 5 5"></path></svg>All projects</a>
+  </nav>
+
+  <div class="case-hero">
+    <p class="eyebrow">Case study · SteelHacks XIII</p>
+    <h1 class="case-title">Syllo</h1>
+    <p class="case-lead">Syllo turns a Canvas course export into one view of the semester (deadlines, exams, class meetings and course policies), so a student doesn’t have to open every page of every course. I was the backend lead and built the course import end to end.</p>
+    <dl class="case-meta">
+      <div><dt>My role</dt><dd>Backend lead; built the import pipeline and review screen</dd></div>
+      <div><dt>Team</dt><dd>Two people, SteelHacks XIII at the University of Pittsburgh</dd></div>
+      <div><dt>When</dt><dd>September 2026</dd></div>
+      <div><dt>Stack</dt><dd>TypeScript, Supabase Edge Functions and Postgres, NVIDIA Nemotron, React; early backend in Python and FastAPI</dd></div>
+    </dl>
+    <div class="case-actions">
+      <a class="btn" href="https://github.com/Landyn-bot/student-hub">View code on GitHub<span class="arr" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></span></a>
+    </div>
+  </div>
+</header>
+
+<main class="sheet content" id="main">
+
+  <section class="sec" aria-labelledby="problem-h">
+    <div class="sec-head">
+      <p class="eyebrow">01 — Problem</p>
+      <h2 class="sec-title" id="problem-h">The semester is scattered across pages</h2>
+    </div>
+    <div class="sec-body prose">
+      <p>Course information lives across syllabi, assignment pages and announcements, each written differently. Deadlines are buried in prose (“12 Oct 2027”), and missing one is costly.</p>
+      <p>Canvas can export a whole course as an EPUB file. Syllo reads that file and pulls out the parts a student actually plans around.</p>
+      <h3>Who it’s for</h3>
+      <p>College students who want a single, trustworthy list of what’s due and when, built from their own course material rather than a manual spreadsheet.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="mine-h">
+    <div class="sec-head">
+      <p class="eyebrow">02 — Ownership</p>
+      <h2 class="sec-title" id="mine-h">What I built, and what the team built</h2>
+    </div>
+    <div class="sec-wide owners">
+      <div class="owner">
+        <p class="owner-tag">My work</p>
+        <ul class="xp">
+          <li>The first backend: a FastAPI service, a SQLite data model and a deterministic EPUB parser in Python, with tests</li>
+          <li>The import pipeline that shipped: a Supabase Edge Function that validates and unpacks the EPUB, normalises it into sections, has Nemotron extract records, validates them against a strict schema and stages them</li>
+          <li>The upload page and the review screen, where students edit, add or remove staged records before confirming</li>
+          <li>Staging tables, class meetings, source citations and the “Classes today” dashboard list</li>
+          <li>Tests for the import function: request handling, EPUB parsing, schema validation, classification and extraction</li>
+          <li>The architecture, security and pitch documents</li>
+        </ul>
+      </div>
+      <div class="owner team">
+        <p class="owner-tag">Team work</p>
+        <ul class="xp">
+          <li>The React app shell and dashboard screens, generated with Lovable</li>
+          <li>Repository setup and hosting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="how-h">
+    <div class="sec-head">
+      <p class="eyebrow">03 — How it works</p>
+      <h2 class="sec-title" id="how-h">From an uploaded file to a confirmed semester</h2>
+    </div>
+    <div class="sec-wide">
+      <p class="legend"><span class="k-model">Model</span><span class="k-code">Deterministic code</span><span class="k-person">Student</span></p>
+      <ol class="flow">
+        <li><span class="flow-name">Unpack safely</span><span class="flow-kind k-code">Code</span><span class="flow-text">Checks file size, entry count, compression ratio and paths before inflating anything.</span></li>
+        <li><span class="flow-name">Normalise</span><span class="flow-kind k-code">Code</span><span class="flow-text">Converts each chapter to clean text, keeping headings, lists and tables, then splits it into sections.</span></li>
+        <li><span class="flow-name">Extract</span><span class="flow-kind k-model">Model</span><span class="flow-text">Nemotron reads each section and returns records as JSON, with the source text they came from.</span></li>
+        <li><span class="flow-name">Validate</span><span class="flow-kind k-code">Code</span><span class="flow-text">A strict schema checks types, dates and numbers. Records that don’t fit are rejected, not guessed at.</span></li>
+        <li><span class="flow-name">Review</span><span class="flow-kind k-person">Student</span><span class="flow-text">The student edits, adds or removes staged records, with each record’s source shown alongside.</span></li>
+        <li><span class="flow-name">Confirm</span><span class="flow-kind k-code">Code</span><span class="flow-text">Only Confirm writes to the dashboard tables.</span></li>
+      </ol>
+      <p class="flow-note">The model never sees the raw archive, only normalised text, and it can’t write to the database. Everything that decides what gets saved is deterministic code or the student.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="decisions-h">
+    <div class="sec-head">
+      <p class="eyebrow">04 — Decisions</p>
+      <h2 class="sec-title" id="decisions-h">Choices and their trade-offs</h2>
+    </div>
+    <div class="sec-body decisions">
+      <div class="decision">
+        <h3>Review before commit</h3>
+        <p>AI output is staged, not saved. The student sees every extracted deadline next to its source and confirms before anything reaches the dashboard.</p>
+        <p class="trade">Trade-off: one extra step for the student. In exchange, a misread date never lands silently in someone’s plan.</p>
+      </div>
+      <div class="decision">
+        <h3>Parse deterministically, then use AI</h3>
+        <p>Unpacking, cleaning and splitting the file is ordinary code with predictable behaviour and its own tests. The model only handles the part that needs judgement: reading prose and pulling out structured records.</p>
+      </div>
+      <div class="decision">
+        <h3>Where the pipeline runs</h3>
+        <p>The first backend I set up was FastAPI with SQLite. The pipeline that shipped runs as a TypeScript Supabase Edge Function, alongside the app’s existing Supabase database and sign-in.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="hard-h">
+    <div class="sec-head">
+      <p class="eyebrow">05 — The hard part</p>
+      <h2 class="sec-title" id="hard-h">An import that said “Complete” and saved almost nothing</h2>
+    </div>
+    <div class="sec-body">
+      <dl class="pfr">
+        <div><dt>Problem</dt><dd>A real Canvas export finished with a “Complete” status, but only the smallest section produced records. Large sections were being cut off by the model’s output limit, and their records were silently lost.</dd></div>
+        <div><dt>Fix</dt><dd>I raised the reply limit to 8,192 tokens and capped sections at 8,000 characters. I also made the function detect when a reply stops because of the length limit (<code>finish_reason: "length"</code>) and re-read that section as two halves. If a half still can’t be read, the section fails visibly instead of quietly.</dd></div>
+        <div><dt>Result</dt><dd>Long sections now produce records, and a section that can’t be read shows up as a failure the student can see. Tests cover the truncation and re-read path. Along the way I also fixed a date bug: “12 Oct 2027” was being read as October 20.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="testing-h">
+    <div class="sec-head">
+      <p class="eyebrow">06 — Security &amp; reliability</p>
+      <h2 class="sec-title" id="testing-h">Treating an uploaded file as untrusted</h2>
+    </div>
+    <div class="sec-body prose">
+      <h3>Archive safety</h3>
+      <p>An EPUB is a ZIP file, so the importer checks limits before inflating anything: 30 MB per archive, 5,000 entries, 8 MB per entry, 48 MB inflated in total and a 200:1 compression-ratio cap to catch zip bombs. It rejects entry names that escape the archive (<code>..</code> or absolute paths), duplicate names, ZIP64 and encrypted entries.</p>
+      <h3>Validating model output</h3>
+      <p>Every model reply has to match a strict schema. Invalid records are rejected rather than repaired by guesswork, and failures are reported instead of hidden.</p>
+      <h3>Tests</h3>
+      <p>Unit tests cover the request handler, EPUB parsing, schema validation, record classification and the truncation path, using synthetic EPUB fixtures. The early Python backend has its own tests for the data model and parser.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="results-h">
+    <div class="sec-head">
+      <p class="eyebrow">07 — Results</p>
+      <h2 class="sec-title" id="results-h">Where it stands</h2>
+    </div>
+    <div class="sec-body prose">
+      <p>The import works end to end on a real Canvas course export: upload, extract, review and confirm, with the confirmed records feeding the dashboard and the “Classes today” list.</p>
+      <h3>Known limitations</h3>
+      <ul class="xp">
+        <li>Schema checks prove a record is well formed, not that it’s correct. That’s why students review before confirming.</li>
+        <li>Extraction accuracy (precision, recall, invented dates) is planned in the project docs but hasn’t been measured yet</li>
+        <li>Only Canvas EPUB exports are supported; there’s no live Canvas integration</li>
+      </ul>
+      <h3>Next steps</h3>
+      <ul class="xp">
+        <li>Measure extraction accuracy on synthetic course fixtures, so changes can be compared with numbers</li>
+        <li>Build “Ask My Semester,” an assistant that answers only from imported material, with citations</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<nav class="case-next" aria-label="More projects">
+  <div>
+    <p>Next project</p>
+    <a class="case-next-link" href="dental-time-machine.html">Dental Time Machine<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"></path><path d="M14 7l5 5-5 5"></path></svg></a>
+  </div>
+  <a class="social" href="../files/Iyinoluwa-Sopeyin-Resume.pdf" target="_blank" rel="noopener">View résumé<svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></a>
+</nav>
+
+<footer class="site-footer">
+  <p>© 2026 Iyinoluwa Sopeyin</p>
+  <a href="#top">Back to top ↑</a>
+</footer>
+
+</div>
+</body>
+</html>

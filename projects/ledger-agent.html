@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledger Agent — Case study · Iyin Sopeyin</title>
+<meta name="description" content="A self-correcting natural-language-to-SQL agent built with LangGraph, with a deterministic guard, a read-only database and a measured repair loop.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316181C'/%3E%3Ctext x='29' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='38' fill='%23fff'%3EI%3C/text%3E%3Ccircle cx='45' cy='42' r='5' fill='%23CF3B3B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="pf">
+
+<header class="sheet case-top" id="top">
+  <nav class="case-bar" aria-label="Primary">
+    <a class="logo" href="../index.html">Iyin<span class="accent">.</span></a>
+    <div class="spacer"></div>
+    <a class="case-back" href="../index.html#projects"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H5"></path><path d="M10 7l-5 5 5 5"></path></svg>All projects</a>
+  </nav>
+
+  <div class="case-hero">
+    <p class="eyebrow">Case study · Solo project</p>
+    <h1 class="case-title">Ledger Agent</h1>
+    <p class="case-lead">A natural-language-to-SQL agent for a personal finance ledger. It checks its own queries, repairs them from the exact error and refuses rather than guess. I built it to measure how much a self-repair loop is actually worth.</p>
+    <dl class="case-meta">
+      <div><dt>My role</dt><dd>Everything: design, build and evaluation</dd></div>
+      <div><dt>Type</dt><dd>Personal project</dd></div>
+      <div><dt>When</dt><dd>2026</dd></div>
+      <div><dt>Stack</dt><dd>Python, LangGraph, Claude (Anthropic API), SQLite</dd></div>
+    </dl>
+    <div class="case-actions">
+      <a class="btn" href="https://github.com/IyinoluwaS/ledger-agent">View code on GitHub<span class="arr" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></span></a>
+    </div>
+  </div>
+</header>
+
+<main class="sheet content" id="main">
+
+  <section class="sec" aria-labelledby="problem-h">
+    <div class="sec-head">
+      <p class="eyebrow">01 — Problem</p>
+      <h2 class="sec-title" id="problem-h">A wrong number is worse than no answer</h2>
+    </div>
+    <div class="sec-body prose">
+      <p>Text-to-SQL demos often look right and return the wrong figure. For a question like “How much did I spend on groceries in March?”, a confident wrong answer does more harm than a refusal.</p>
+      <p>I wanted an agent that either returns a number it can back up or says it can’t answer. I also wanted evidence, not a hunch, about whether its self-repair loop helps.</p>
+      <h3>Who it’s for</h3>
+      <p>Someone asking questions about their own spending. It’s a learning project: the ledger is synthetic and seeded, so anyone who clones the repo gets identical data and comparable results.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="mine-h">
+    <div class="sec-head">
+      <p class="eyebrow">02 — What I built</p>
+      <h2 class="sec-title" id="mine-h">My contribution</h2>
+    </div>
+    <div class="sec-body">
+      <div class="owner">
+        <p class="owner-tag">My work: a solo project</p>
+        <ul class="xp">
+          <li>A LangGraph state machine with five steps, only two of which call the model</li>
+          <li>A deterministic SQL guard that validates every query against the live schema</li>
+          <li>A read-only data layer: nothing outside one module touches the database</li>
+          <li>A seeded synthetic ledger that models monthly bills separately from everyday spending</li>
+          <li>An evaluation harness: 16 questions with hand-written ground truth, run under four conditions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="how-h">
+    <div class="sec-head">
+      <p class="eyebrow">03 — How it works</p>
+      <h2 class="sec-title" id="how-h">Two model calls, three deterministic checks</h2>
+    </div>
+    <div class="sec-wide">
+      <p class="legend"><span class="k-model">Model</span><span class="k-code">Deterministic code</span></p>
+      <ol class="flow">
+        <li><span class="flow-name">Load schema</span><span class="flow-kind k-code">Code</span><span class="flow-text">Reads tables, columns and three sample rows per table from SQLite. This is all the model learns about the data.</span></li>
+        <li><span class="flow-name">Write SQL</span><span class="flow-kind k-model">Model</span><span class="flow-text">Writes one <code>SELECT</code>. On a retry it also gets the failed query and the exact error.</span></li>
+        <li><span class="flow-name">Guard</span><span class="flow-kind k-code">Code</span><span class="flow-text">Rejects anything that isn’t a single <code>SELECT</code>, has no <code>LIMIT</code>, or names a column that doesn’t exist.</span></li>
+        <li><span class="flow-name">Execute</span><span class="flow-kind k-code">Code</span><span class="flow-text">Runs on a read-only connection and returns rows or an error as a value. It never raises.</span></li>
+        <li><span class="flow-name">Explain</span><span class="flow-kind k-model">Model</span><span class="flow-text">Turns rows into an English answer, or an honest “I couldn’t answer that.”</span></li>
+      </ol>
+      <p class="flow-note">If the guard or SQLite rejects a query, the error message goes back to step 2, up to a configurable retry budget. The model doesn’t get smarter on the second attempt; it gets better information, such as <code>column 'merchant' does not exist. Available: id, merchant_id, …</code></p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="decisions-h">
+    <div class="sec-head">
+      <p class="eyebrow">04 — Decisions</p>
+      <h2 class="sec-title" id="decisions-h">Choices and their trade-offs</h2>
+    </div>
+    <div class="sec-body decisions">
+      <div class="decision">
+        <h3>Errors are values, not exceptions</h3>
+        <p>The query runner returns <code>(rows, error)</code> instead of raising. You can’t route a graph on an exception, but you can route on a value, and that single choice is what makes the repair loop possible.</p>
+      </div>
+      <div class="decision">
+        <h3>Two independent safety layers</h3>
+        <p>The database connection is opened read-only, so SQLite itself refuses writes, and the guard rejects anything that isn’t one <code>SELECT</code>. The prompt also asks for safe SQL, but I treat that as a hint. A prompt is not a security boundary.</p>
+      </div>
+      <div class="decision">
+        <h3>Money stored as integer cents</h3>
+        <p>Floating-point error accumulates across thousands of rows, so all arithmetic happens in cents and the division by 100 happens once, at display time.</p>
+      </div>
+      <div class="decision">
+        <h3>A pattern-based guard instead of a SQL parser</h3>
+        <p>The guard is short, transparent and fast, with no extra dependency.</p>
+        <p class="trade">Trade-off: it has known blind spots, such as SQL comments and <code>LIMIT</code> inside a string literal. I chose to document those rather than write a full parser; they’re listed under limitations below.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="hard-h">
+    <div class="sec-head">
+      <p class="eyebrow">05 — The hard part</p>
+      <h2 class="sec-title" id="hard-h">The bugs were in my measuring tools</h2>
+    </div>
+    <div class="sec-body">
+      <dl class="pfr">
+        <div><dt>Problem</dt><dd>Some early failures looked like model mistakes. A question that should take one attempt was taking two, because the guard rejected <code>SUM(amount_cents) AS total_cents</code>: <code>total_cents</code> isn’t a real column, but it is a legal alias.</dd></div>
+        <div><dt>What I tried</dt><dd>My first fix stripped the <code>AS</code> definition before checking identifiers. That was incomplete: the alias is also referenced later, in <code>ORDER BY</code>, and that reference was still rejected.</dd></div>
+        <div><dt>Fix</dt><dd>Collect every alias a query defines into an allowed set before checking identifiers. Reading the ablation failures, not just the score, also turned up two grading bugs: a month written as “March” when the data stores <code>2026-03</code>, and an empty aggregate returning one row of <code>NULL</code> rather than zero rows.</dd></div>
+        <div><dt>Result</dt><dd>Each bug became a test case. I fixed the ground truth instead of loosening the grader, because a fuzzy grader would also accept wrong answers.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="testing-h">
+    <div class="sec-head">
+      <p class="eyebrow">06 — Testing &amp; reliability</p>
+      <h2 class="sec-title" id="testing-h">How I know it works, and how it fails</h2>
+    </div>
+    <div class="sec-body prose">
+      <h3>Evaluation</h3>
+      <p>16 questions across easy, medium and hard tiers. I wrote every answer in SQL by hand before the agent saw the question, then cross-checked the answers against each other: the three monthly totals sum exactly to the grand total. Answers are graded on returned values, never on query text, because many correct queries exist for one question. A missing ground truth counts as a failure, and each ablation changes exactly one variable.</p>
+      <h3>Unit tests</h3>
+      <p>The guard ships with 13 self-tests covering rejected writes, stacked statements, missing limits and invented tables or columns. All 13 pass.</p>
+      <h3>Failure handling</h3>
+      <p>An empty result means “no rows matched,” never an invented figure. An exhausted retry budget returns “I could not answer that” with the last error. The model is pinned to a dated snapshot so the four runs compare like with like.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="results-h">
+    <div class="sec-head">
+      <p class="eyebrow">07 — Results</p>
+      <h2 class="sec-title" id="results-h">What the repair loop is worth</h2>
+    </div>
+    <div class="sec-body prose">
+      <div class="table-wrap">
+        <table class="results">
+          <caption class="note">Accuracy on 16 hand-verified questions, synthetic ledger data.</caption>
+          <thead><tr><th scope="col">Prompt</th><th scope="col">Repair on</th><th scope="col">Repair off</th><th scope="col">Loop adds</th></tr></thead>
+          <tbody>
+            <tr><td>Rich prompt</td><td>100%</td><td>94%</td><td>+6 points</td></tr>
+            <tr><td>Minimal prompt</td><td>94%</td><td>62%</td><td>+32 points</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The rich prompt spells out what this model tends to get wrong: money is in cents, dates are text, SQLite has no <code>DATE_TRUNC</code>. With those hints, first attempts are almost always right. Strip the prompt back and first-attempt accuracy falls to 62%; the repair loop brings it back to 94%.</p>
+      <p><strong>My conclusion:</strong> the repair loop and prompt engineering are substitutes. The loop delivers the same constraints as error messages, only for the queries that need them. It restores correctness, not quality: a twice-rejected model writes a right but noticeably clumsier query.</p>
+      <pre class="code" aria-label="Example terminal session showing two rejected attempts and a correct answer">$ MINIMAL_PROMPT=1 python cli.py "How much did I pay in rent across the whole period?"
+
+You paid $5,550.00 in rent across the whole period.
+--- 1 rows, 3 attempt(s) ---</pre>
+      <h3>Known limitations</h3>
+      <ul class="xp">
+        <li>Results come from 16 questions on synthetic data, not real users or real bank data</li>
+        <li>SQL comments aren’t stripped before scanning, and <code>LIMIT</code> inside a string literal satisfies the limit check</li>
+        <li>Escaped apostrophes, such as <code>'Trader Joe''s'</code>, can cause false rejections</li>
+        <li>Foreign keys are declared but not enforced</li>
+      </ul>
+      <h3>Next steps</h3>
+      <ul class="xp">
+        <li>Guard against prompt injection through sample rows: a merchant name containing instructions reaches the model via the schema</li>
+        <li>Estimate query cost before running it, since a <code>LIMIT</code> doesn’t prevent an expensive scan</li>
+        <li>Add a human approval step before execution, and use a cheaper model for the explanation step</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<nav class="case-next" aria-label="More projects">
+  <div>
+    <p>Next project</p>
+    <a class="case-next-link" href="syllo.html">Syllo<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"></path><path d="M14 7l5 5-5 5"></path></svg></a>
+  </div>
+  <a class="social" href="../files/Iyinoluwa-Sopeyin-Resume.pdf" target="_blank" rel="noopener">View résumé<svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></a>
+</nav>
+
+<footer class="site-footer">
+  <p>© 2026 Iyinoluwa Sopeyin</p>
+  <a href="#top">Back to top ↑</a>
+</footer>
+
+</div>
+</body>
+</html>

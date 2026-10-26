@@ -17,3 +17,10 @@ menuButton.addEventListener('click', () => setMenuOpen(menu.hidden));
 menu.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => setMenuOpen(false));
 });
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !menu.hidden) {
+    setMenuOpen(false);
+    menuButton.focus();
+  }
+});
