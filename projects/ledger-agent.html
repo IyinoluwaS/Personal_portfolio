@@ -5,11 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ledger Agent — Case study · Iyin Sopeyin</title>
 <meta name="description" content="A self-correcting natural-language-to-SQL agent built with LangGraph, with a deterministic guard, a read-only database and a measured repair loop.">
+<meta property="og:title" content="Ledger Agent — Case study · Iyin Sopeyin">
+<meta property="og:description" content="A self-correcting natural-language-to-SQL agent built with LangGraph, with a deterministic guard, a read-only database and a measured repair loop.">
+<meta property="og:image" content="https://iyinoluwas.github.io/Personal_portfolio/images/og-card.jpg">
+<meta property="og:url" content="https://iyinoluwas.github.io/Personal_portfolio/projects/ledger-agent.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316181C'/%3E%3Ctext x='29' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='38' fill='%23fff'%3EI%3C/text%3E%3Ccircle cx='45' cy='42' r='5' fill='%23CF3B3B'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="preload" href="../fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/poppins-600.woff2" as="font" type="font/woff2" crossorigin>
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="../css/styles.css">
+<script src="../js/main.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -19,6 +26,7 @@
   <nav class="case-bar" aria-label="Primary">
     <a class="logo" href="../index.html">Iyin<span class="accent">.</span></a>
     <div class="spacer"></div>
+    <button class="theme-toggle" type="button" aria-label="Dark theme" aria-pressed="false" hidden><svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg><svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
     <a class="case-back" href="../index.html#projects"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H5"></path><path d="M10 7l-5 5 5 5"></path></svg>All projects</a>
   </nav>
 
@@ -38,9 +46,11 @@
   </div>
 </header>
 
+<nav class="case-toc" aria-label="On this page" hidden><div class="toc-inner"></div></nav>
+
 <main class="sheet content" id="main">
 
-  <section class="sec" aria-labelledby="problem-h">
+  <section class="sec" id="problem" aria-labelledby="problem-h">
     <div class="sec-head">
       <p class="eyebrow">01 — Problem</p>
       <h2 class="sec-title" id="problem-h">A wrong number is worse than no answer</h2>
@@ -53,7 +63,7 @@
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="mine-h">
+  <section class="sec" id="ownership" aria-labelledby="mine-h">
     <div class="sec-head">
       <p class="eyebrow">02 — What I built</p>
       <h2 class="sec-title" id="mine-h">My contribution</h2>
@@ -72,7 +82,7 @@
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="how-h">
+  <section class="sec" id="how-it-works" aria-labelledby="how-h">
     <div class="sec-head">
       <p class="eyebrow">03 — How it works</p>
       <h2 class="sec-title" id="how-h">Two model calls, three deterministic checks</h2>
@@ -90,7 +100,7 @@
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="decisions-h">
+  <section class="sec" id="decisions" aria-labelledby="decisions-h">
     <div class="sec-head">
       <p class="eyebrow">04 — Decisions</p>
       <h2 class="sec-title" id="decisions-h">Choices and their trade-offs</h2>
@@ -116,7 +126,7 @@
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="hard-h">
+  <section class="sec" id="challenge" aria-labelledby="hard-h">
     <div class="sec-head">
       <p class="eyebrow">05 — The hard part</p>
       <h2 class="sec-title" id="hard-h">The bugs were in my measuring tools</h2>
@@ -131,7 +141,7 @@
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="testing-h">
+  <section class="sec" id="testing" aria-labelledby="testing-h">
     <div class="sec-head">
       <p class="eyebrow">06 — Testing &amp; reliability</p>
       <h2 class="sec-title" id="testing-h">How I know it works, and how it fails</h2>
@@ -146,13 +156,27 @@
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="results-h">
+  <section class="sec" id="results" aria-labelledby="results-h">
     <div class="sec-head">
       <p class="eyebrow">07 — Results</p>
       <h2 class="sec-title" id="results-h">What the repair loop is worth</h2>
     </div>
     <div class="sec-body prose">
-      <div class="table-wrap">
+      <div class="bars" aria-hidden="true">
+        <div class="bar-legend"><span>Repair on</span><span class="off">Repair off</span></div>
+        <div class="bar-group">
+          <div class="bar-head">Rich prompt <span class="delta">+6 pts</span></div>
+          <div class="bar-row"><span>Repair on</span><div class="bar-track"><div class="bar-fill" style="--v:100%"></div></div><b>100%</b></div>
+          <div class="bar-row"><span>Repair off</span><div class="bar-track"><div class="bar-fill off" style="--v:94%"></div></div><b>94%</b></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-head">Minimal prompt <span class="delta">+32 pts</span></div>
+          <div class="bar-row"><span>Repair on</span><div class="bar-track"><div class="bar-fill" style="--v:94%"></div></div><b>94%</b></div>
+          <div class="bar-row"><span>Repair off</span><div class="bar-track"><div class="bar-fill off" style="--v:62%"></div></div><b>62%</b></div>
+        </div>
+      </div>
+      <p class="note">Accuracy on 16 hand-verified questions, synthetic ledger data.</p>
+      <div class="table-wrap sr-only">
         <table class="results">
           <caption class="note">Accuracy on 16 hand-verified questions, synthetic ledger data.</caption>
           <thead><tr><th scope="col">Prompt</th><th scope="col">Repair on</th><th scope="col">Repair off</th><th scope="col">Loop adds</th></tr></thead>

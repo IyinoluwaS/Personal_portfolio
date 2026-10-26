@@ -8,9 +8,11 @@ A personal portfolio site written in plain HTML and CSS, with a small JavaScript
 index.html        the home page (GitHub Pages serves this automatically)
 projects/         one case-study page per project
 css/styles.css    all styles, shared by every page
-js/main.js        opens and closes the phone menu
-images/           portrait and project screenshots
+js/main.js        theme toggle, menu, sticky nav, section bar, scroll effects
+images/           portrait, project screenshots and link-preview card
+fonts/            self-hosted Poppins and JetBrains Mono
 files/            résumé PDF
+404.html          page shown by GitHub Pages for missing links
 ```
 
 ## Run it locally
