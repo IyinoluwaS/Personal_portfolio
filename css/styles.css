@@ -47,7 +47,7 @@ ul{padding:0;list-style:none}
 .spacer{flex-grow:1}
 .panel{position:absolute;left:21%;width:44%;top:17%;bottom:0;background:var(--panel)}
 .h-left{position:absolute;left:7%;top:28%;width:27%;z-index:2}
-.h-portrait{position:absolute;bottom:0;left:47.5%;transform:translateX(-46%);height:79%;aspect-ratio:911/1053;z-index:1}
+.h-portrait{position:absolute;bottom:0;left:47.5%;transform:translateX(-46%);height:79%;aspect-ratio:1084/1451;z-index:1}
 .h-portrait img{display:block;width:100%;height:100%;object-fit:contain;object-position:bottom}
 .h-right{position:absolute;left:66.5%;top:26%;width:26.5%;z-index:2}
 .h-foot{position:absolute;left:7%;right:7%;bottom:5.5%;z-index:3;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
